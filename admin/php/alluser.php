@@ -1,0 +1,60 @@
+<?php
+include '../DB/registrationDB.php';
+
+
+$sql="SELECT * FROM registration";
+$result=mysqli_query($conn,$sql);
+
+?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>aiub clone</title>
+        <link rel="stylesheet"  href="../css/aiub.css">
+    </head>
+    <body>
+        <center>
+        <h2>
+             <label  style="color: rgb(13, 101, 202); font-family:Arial, Helvetica, sans-serif;  font-size: 25px;">VIEW ALL USER</label><br>
+             <label  style="color: rgb(22, 22, 22); ">************************************************</label>
+        </h2>
+<div>
+        <table class="table" style="font-size:18px;">
+                
+                <tr class="tablerow">
+                    <td class="tableheading">ID</td>
+                    <td class="tableheading">Name</td>
+                    <td class="tableheading">Userid</td>
+                    <td class="tableheading">role</td>
+                    <td class="tableheading">dept.</td>
+                    <td class="tableheading">email</td>
+                </tr>
+                <?php
+                if(mysqli_num_rows($result)>0)
+                {
+                    while($row=mysqli_fetch_assoc($result))
+                    {
+                        echo "<tr class='tablerow'>";
+                        echo"<td calss='tableheading'>".$row['ID']."</td>";
+                        echo "<td calss='tableheading'>".$row['fullname']."</td>";
+                        echo "<td calss='tableheading'>".$row['username']."</td>";
+                        echo "<td calss='tableheading'>".$row['role']."</td>";
+                         echo "<td calss='tableheading'>".$row['department']."</td>";
+                        echo "<td calss='tableheading'>".$row['email']."</td>";
+                        echo "</tr>";
+                    }
+                }
+                else
+                {
+                    echo "<tr><td colspan='5'>no record found</td></tr>";
+                }
+                
+                ?>
+       </table>
+
+            </div>
+         </center>
+       <!-- <button  onclick="document.location.href='Aiub .html'" id="back" >Back</button> -->
+    </body>
+</html>
