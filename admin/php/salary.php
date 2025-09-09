@@ -73,7 +73,8 @@ $show2=mysqli_query($conn,$sql2);
 
                 }
                 ?>
-        </table></center>
+        </table>
+    </center>
         
         <table  class="table" style="width:100px;font-size:18px;align:left;">
                 

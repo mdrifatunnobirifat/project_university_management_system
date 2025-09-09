@@ -25,6 +25,7 @@ session_start();
            <a href="#" onclick="loadpage('../php/salary.php')"><button >Manage Salary</button></a>
            <a href="#" onclick="loadpage('../php/leaveapplication.php')"><button >Manage Leave Application</button></a> 
            <a href="#" onclick="loadpage('../php/notifications.php')"><button >Manage Notifications</button></a> 
+           <a href="#" onclick="loadpage('../php/addcourse.php')"><button >Add Course</button></a> 
             </div>
         </div>
     

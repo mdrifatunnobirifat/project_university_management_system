@@ -64,7 +64,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
         elseif($role=="Student")
         {
             if(!preg_match("/^[1-9]{2}-[0-9]{5}-[1-3]{1}$/",$username))
-            { $usernameerr="student id must be in the format XX-XXXXX-XX";}
+            { $usernameerr="student id must be in the format XX[1-9]-XXXXX[1-9]-X[1-3]";}
         }
         
     }

@@ -147,7 +147,7 @@ header
   width:1200px;
   height: 250px;
   border: 6px solid black;
-  gap: 70px;
-  
-
+  gap: 50px;
+  justify-content: space-between;
  }
+
