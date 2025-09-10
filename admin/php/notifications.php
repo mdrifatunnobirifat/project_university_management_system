@@ -1,8 +1,7 @@
 <?php
 include '../DB/registrationDB.php';
 
-$sql="SELECT * FROM leaveapplication";
-$result=$conn->query($sql);
+
 
 ?>
 
