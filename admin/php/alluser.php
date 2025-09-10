@@ -3,7 +3,7 @@ include '../DB/registrationDB.php';
 
 
 $sql="SELECT * FROM registration";
-$result=mysqli_query($conn,$sql);
+$result=$conn->query($sql);
 
 ?>
 
@@ -33,7 +33,7 @@ $result=mysqli_query($conn,$sql);
                 <?php
                 if(mysqli_num_rows($result)>0)
                 {
-                    while($row=mysqli_fetch_assoc($result))
+                    while($row=$result->fetch_assoc())
                     {
                         echo "<tr class='tablerow'>";
                         echo"<td calss='tableheading'>".$row['ID']."</td>";

@@ -1,6 +1,7 @@
 <?php
 include  '../DB/registrationDB.php';
-$tsql="SELECT username,fullname FROM teacher ";
+
+$tsql="SELECT username,fullname,department FROM registration WHERE role='Teacher' ";
 $tresult=$conn->query($tsql);
 
 $csql="SELECT course,date1,date2,time  FROM addcourse";
@@ -17,7 +18,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
     $department=$_POST['department'];
 
 
-   if(emtpy($fullname))
+   if(empty($fullname))
    {
     $fullnameerr="enter the fullname";
    }
@@ -26,7 +27,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
      $fullname=test_input($_POST['fullname']);
    }
 
-    if(emtpy($username))
+    if(empty($username))
     {
      $usenameerr="plaese select usr name";
     }
@@ -77,6 +78,11 @@ function test_input($data)
 
 }
 
+if(isset($_POST['submit']))
+{
+    $sql="INSERT INTO tcourse(fulllname,username,department,course) VALUES('$fullname','$username','$department','$course')";
+}
+
 
 ?>
 
@@ -95,10 +101,39 @@ function test_input($data)
              <label  style="color: rgb(22, 22, 22); ">************************************************</label>
         </h2>
         <br>
+<form method="post">
 
-        
+        <table  class="table" style="width:1200px;font-size:18px;align:left;">
+                
+                <tr class="tablerow">
+                    <td class="tableheading">username</td>
+                    <td class="tableheading">fullname</td>
+                    <td class="tableheading">department</td>
+                    <td class="tableheading">assinged course</td>
+               </tr>
 
-       
+                <?php
+                if($tresult->num_rows>0)
+                {
+                    while($row=$tresult->fetch_assoc())
+                    {
+                        echo "<tr class='tablerow'>";
+                        echo "<td class='tableheading'>".$row['username']."</td>";
+                        echo "<td class='tableheading'>".$row['fullname']."</td>";
+                        echo "<td class='tableheading'>".$row['department']."</td>";
+                        echo "<td class='tableheading'><select>
+                        <option value='SELECT course FROM addcourse'></option></select></td>";/////make adropdown of course name from the addcourse DB
+                        echo "<td class='tableheading'><button type='submit'name='add'style='width:20px;height:20px;padding:0;border:none'><img src='../image/course_add_icon.png' alt='add'style='width:25px;height:25px;display:block;margin:auto;'></button></td>";
+                        echo "</tr>";
+                        
+                    }
+
+                }
+                ?>
+
+              </table>
+
+            </form>
       </center>
         <!--<button  onclick="document.location.href='Aiub .html'" id="back">Back</button>  -->
     </body>

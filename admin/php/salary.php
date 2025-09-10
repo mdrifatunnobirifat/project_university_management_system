@@ -15,13 +15,15 @@ if($result->num_rows>0)
 $row=$result->fetch_assoc();
 
 
-if($salary <5000 || $salary > 100000)
+if($salary <5000 || $salary > 200000)
 {
     $salaryerr="entern a valid amount";
 }
     else
     {
      $sql="INSERT INTO salary(username,salary) VALUES('$username','$salary')";
+     if($conn->query($sql))
+     {echo "<script>alert('salary stored');</script>";}
     }
 }
 }

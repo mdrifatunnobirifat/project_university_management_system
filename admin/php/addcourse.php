@@ -1,8 +1,8 @@
 <?php
 include  '../DB/registrationDB.php';
 
-$course=$sdate=$edate2=$time=$seat="";
-$courseerr=$timeerr=$date1err=$seaterr="";
+$course=$sdate=$edate2=$time=$seat=$section="";
+$courseerr=$timeerr=$date1err=$seaterr=$sectionerr="";
 $successful=$error="";
 if($_SERVER["REQUEST_METHOD"]=="POST")
 {
@@ -11,6 +11,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
  $edate=$_POST['date2'];
  $time=$_POST['time'];
  $seat=$_POST['seat'];
+ $section=$_POST['section'];
 
 
  if(empty($course))
@@ -24,6 +25,19 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
         $course=test_input($_POST['course']);
     }
  }
+
+ if(empty($section))
+ {
+    $sectionerr="please enter the course name";
+ }
+ else
+ {
+    if(preg_match("/^[a-zA-z' ]{1}$/",$section))
+    {
+        $section=test_input($_POST['section']);
+    }
+ }
+
 
  if(empty($dates))
  {
@@ -53,10 +67,10 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
     if(!empty($course) && !empty($sdate) && !empty($time) && !empty($seat))
     {
-        $sql="INSERT INTO addcourse(course,date1,date2,time,seat) VALUES('$course','$sdate','$edate','$time','$seat')";
+        $sql="INSERT INTO addcourse(course,section,date1,date2,time,seat) VALUES('$course','$section','$sdate','$edate','$time','$seat')";
         if($conn->query($sql)===TRUE)
         {
-            echo "<script>alert('course registered successfull);</script>";
+            echo "<script>alert('course registered successfull');</script>";
             $course=$date1=$date2=$time=$seat="";
         }
         else
@@ -90,8 +104,11 @@ function test_input($data)
         </h2>
         <br>
         <div>
-        Course Name<input type="text" id="course" name="course" >\
+        Course Name<input type="text" id="course" name="course" >
         <span><?php echo $courseerr; ?></span><br><br>
+         Scetion<input type ="text" name="section" id="section">
+        <span><?php echo $sectionerr; ?></span>
+         <br><br>
         <select id="date1" name="date1">
             <option value="saturday">saturday</option>
             <option value="sunday">sunday</otpion>
