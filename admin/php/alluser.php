@@ -36,12 +36,12 @@ $result=$conn->query($sql);
                     while($row=$result->fetch_assoc())
                     {
                         echo "<tr class='tablerow'>";
-                        echo"<td calss='tableheading'>".$row['ID']."</td>";
-                        echo "<td calss='tableheading'>".$row['fullname']."</td>";
-                        echo "<td calss='tableheading'>".$row['username']."</td>";
-                        echo "<td calss='tableheading'>".$row['role']."</td>";
-                         echo "<td calss='tableheading'>".$row['department']."</td>";
-                        echo "<td calss='tableheading'>".$row['email']."</td>";
+                        echo"<td class='tableheading'>".$row['ID']."</td>";
+                        echo "<td class='tableheading'>".$row['fullname']."</td>";
+                        echo "<td class='tableheading'>".$row['username']."</td>";
+                        echo "<td class='tableheading'>".$row['role']."</td>";
+                         echo "<td class='tableheading'>".$row['department']."</td>";
+                        echo "<td class='tableheading'>".$row['email']."</td>";
                         echo "</tr>";
                     }
                 }

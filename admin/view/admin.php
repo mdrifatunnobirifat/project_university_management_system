@@ -18,7 +18,7 @@ session_start();
         <div class="dropdown" style="float:left;">  
          <img src="../image/menu icon.jpg" alt="menu" style="width:50px; height:50px;" class="dropbtn">    
          <div  class="dropdown-content" style="left:0;">
-           <a href="#" onclick="loadpage('../php/alluser.php')"><button>View All User</button> </a>
+           <a href="#" onclick="loadpage('../php/alluser.php')"><button style="border:none;">View All User</button> </a>
            <a href="#" onclick="loadpage('../php/student.php')"><button >Manage Student</button></a>
            <a href="#" onclick="loadpage('../php/teacher.php')"><button >Manage Teacher</button></a>
            <a href="#" onclick="loadpage('../php/course.php')"><button >Assign Course to Teacher</button></a> 
