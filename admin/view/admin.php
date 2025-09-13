@@ -39,7 +39,7 @@ if(!isset($_SESSION['username']))
          <div  class="dropdown" style="float:right;">
             <img src="../../main/image/setting.png" alt="setting" style="width:50px; height:50px;" class="dropbtn">
             <div class="dropdown-content" style="right:0;">
-              <button type="button" id="logout" onclick="document.location.href='../php/logout.php'" >Logout</button>
+              <button type="button" id="logout" onclick="document.location.href='../../main/logout.php'" >Logout</button>
          </div>
          </div>
          
