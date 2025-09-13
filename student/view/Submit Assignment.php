@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include '../../main/DB/DB.php';
 $success=$error="";
 if($_SERVER["REQUEST_METHOD"]=="POST" )
 {

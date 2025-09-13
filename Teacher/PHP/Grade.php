@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include '../../main/DB/DB.php';
 
 // Initialize variables
 $message = $error = $search = '';

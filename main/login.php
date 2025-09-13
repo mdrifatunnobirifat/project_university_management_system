@@ -19,13 +19,13 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
             $_SESSION['username']=$row['username'];
             if(preg_match("/^[0-9]{4}-[0-9]{4}$/",$username))
             {  
-                header("Location:maindesboard.html");//link ke redirect kore day///SHEUN tomar main dashboard er link dibe ei khane
+                header('Location:/project_university_management_system/Teacher/View/teacher.php');//link ke redirect kore day///SHEUN tomar main dashboard er link dibe ei khane
                 exit();
             }
             elseif(preg_match("/^[1-9]{2}-[0-9]{5}-[1-3]{1}$/",$username))
             {
                
-                header("Location:maindesboard.html");///MARUF tomar main  dashboard er link dibe eikhane
+                header('Location:/project_university_management_system/student/view/student.php');///MARUF tomar main  dashboard er link dibe eikhane
                 exit();
             
             }

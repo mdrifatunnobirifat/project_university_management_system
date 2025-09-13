@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config.php';
+include '../../main/DB/DB.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['drop_course'])) {
     $course_id = $_POST['course_id'];

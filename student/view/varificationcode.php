@@ -1,5 +1,5 @@
 <?php
-include 'db.php';
+include '../../main/DB/DB.php';
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     </head>
     <body>
-        <img src="../img/project.png" alt="Forget Password" width="200" height="200"><br><br>
+        <img src="../../main/image/project.png" alt="Forget Password" width="200" height="200"><br><br>
 
         <h2>Enter your verification code</h2>
         <form action="/verify_code" method="post">

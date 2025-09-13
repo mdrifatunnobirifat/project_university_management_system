@@ -1,6 +1,6 @@
 <?php
 // Database connection
-include 'config.php';
+include '../../main/DB/DB.php';
 // Check if id is passed
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']); // Prevent SQL injection

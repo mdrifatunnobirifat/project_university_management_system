@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+if(!isset($_SESSION['username']))
+{
+   header('Location:/project_university_management_system/main/login.php');
+    exit(); 
+}
+
 ?>
 
 
@@ -90,12 +96,12 @@ session_start();
 </head>
     <body>
 
-    <form action="logout.php" method="post">
+    <form action="../../main/logout.php" method="post">
             <button type="submit">Logout</button>
         </form>
 
         <center>
-            <img src="../img/project.png" alt="Home" width="200" height="200">
+            <img src="../../main/image/project.png" alt="Home" width="200" height="200">
                       <h1>Welcome student.....</h1>
         </center>
     <div class ="container">

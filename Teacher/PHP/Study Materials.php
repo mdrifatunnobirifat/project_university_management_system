@@ -49,7 +49,7 @@
 
             <?php
             // Database connection
-           include 'config.php';
+           include '../../main/DB/DB.php';
 
             // Handle upload
             if (isset($_POST['upload'])) {

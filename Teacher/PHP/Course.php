@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include '../../main/DB/DB.php';
 
 // Search functionality
 $search = isset($_GET['search']) ? $_GET['search'] : '';

@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include '../../main/DB/DB.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $task_title = $_POST['task_title'];

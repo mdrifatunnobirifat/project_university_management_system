@@ -84,7 +84,7 @@ $errors = [];
 $success = "";
 
 // Include your database connection file
-include 'db.php';
+include '../../main/DB/DB.php';
 
 // Process the form only when it is submitted via POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

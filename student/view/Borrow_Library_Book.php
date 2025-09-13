@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include 'config.php';
+include '../../main/DB/DB.php';
 
 $book_sql="SELECT title,author,available_copies,price  FROM library_book";
 $paper_sql="SELECT  title,author,available_copies,price FROM library_paper";

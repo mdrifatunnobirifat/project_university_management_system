@@ -1,6 +1,6 @@
 <?php
 
-include 'config.php';
+include '../../main/DB/DB.php';
 session_start();
 
 $web_sql="SELECT section,subject,time FROM web_tech";
