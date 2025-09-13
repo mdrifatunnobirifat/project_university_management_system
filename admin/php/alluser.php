@@ -1,5 +1,5 @@
 <?php
-include '../DB/registrationDB.php';
+include '../../main/DB/DB.php';
 
 
 $sql="SELECT * FROM registration";

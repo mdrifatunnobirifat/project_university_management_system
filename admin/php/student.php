@@ -1,5 +1,5 @@
 <?php
-include '../DB/registrationDB.php';
+include '../../main/DB/DB.php';
 $query="SELECT ID,fullname,username,department,email FROM registration WHERE role='Student'";
 $result=$conn->query($query);
 
@@ -95,8 +95,8 @@ if(isset($_POST['delete']))
                 <option value="FBA">FBA</option>
             </select>
             <br>
-      
-            <button type="submit" name="add"  style="width:55px;height:40px;font-size:11px;border-radius:0px; color:green;">Add</button>  
+           <br>
+            <button type="submit" name="add"  style="width:60px;height:30px;padding:1px;font-size:13px;border-radius:4px; background-color:rgb(99,247,116);">Add</button>  
        </div>
 </form>
  <form method="post">
@@ -104,10 +104,11 @@ if(isset($_POST['delete']))
         <h3>delete student</h3>
         <br>
         
-            <input type="text"  name="username" placeholder="username"><br>
+            <input type="text"  name="username" placeholder="username"><br><br><br>
+
 
           
-          <button type="submit" name="delete"  style="width:55px;height:40px;font-size:11px;border-radius:0px; color:red;">delete</button> 
+          <button type="submit" name="delete"  style="width:60px;height:30px;padding:1px;font-size:13px;border-radius:4px; background-color:rgb(250,122,102);">delete</button> 
         </div>
 </form>
  <form method="post">
@@ -121,8 +122,8 @@ if(isset($_POST['delete']))
                 <option value="FEE">FEE</option>
                 <option value="FBA">FBA</option>
             </select>
-            <br>
-          <button type="submit" name="edit"  style="width:55px;height:40px;font-size:11px;border-radius:0px; color:yellow;">edit</button></td>
+            <br><br><br>
+          <button type="submit" name="edit"  style="width:60px;height:30px;padding:1px;font-size:13px;border-radius:4px; background-color:rgb(250,240,105);">edit</button></td>
         </div>
 </form>
          <!-- <p style="color:red;font-size:15px;">if you want to add then fill up all the inputs</p>

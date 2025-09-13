@@ -1,5 +1,5 @@
 <?php
-include  '../DB/registrationDB.php';
+include  '../../main/DB/DB.php';
 
 $tsql="SELECT username,fullname,department FROM registration WHERE role='Teacher' ";
 $tresult=$conn->query($tsql);
@@ -98,7 +98,7 @@ if(isset($_POST['add']))
                         echo "</select></td>";
 
     
-                         echo "<td class='tableheading'><button type='submit'name='add'style='width:20px;height:20px;padding:0;border:none'><img src='../image/course_add_icon.png' alt='add'style='width:25px;height:25px;display:block;margin:auto;'></button></td>";
+                         echo "<td class='tableheading'><button type='submit'name='add'style='width:20px;height:20px;padding:0;border:none'><img src='../../main/image/course_add_icon.png' alt='add'style='width:25px;height:25px;display:block;margin:auto;'></button></td>";
                        echo "</form>";
                          echo "</tr>";
                         

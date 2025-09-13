@@ -1,5 +1,5 @@
 <?php
-include '../DB/registrationDB.php';
+include '../../main/DB/DB.php';
 
 $salaryerr="";
 if($_SERVER["REQUEST_METHOD"]=="POST")

@@ -1,5 +1,5 @@
 <?php
-include '../Db/registrationDB.php';
+include '../../main/DB/DB.php';
 $query="SELECT  ID,fullname,username,department,email FROM registration WHERE role='Teacher'";
 $result=$conn->query($query);
 
@@ -90,7 +90,7 @@ if(isset($_POST['add']))
                 <option value="FBA">FBA</option>
               </select>
               <br><br>
-               <button type ="submit" name="add" style="width:55px;height:40px;font-size:11px;border-radius:0px; color:green;">Add</button>  <br>
+               <button type ="submit" name="add" style="width:60px;height:30px;padding:1px;font-size:13px;border-radius:4px; background-color:rgb(99,247,116);">Add</button>  <br>
                 </div>
                 </form>
                  <!-- <input type="text" name="password" placeholder="password">-->
@@ -106,9 +106,9 @@ if(isset($_POST['add']))
                          <option value="FEE">FEE</option>
                          <option value="FBA">FBA</option>
                       </select></br>
-                      <br>
-
-                  <button type ="submit" name="edit" style="width:55px;height:40px;font-size:11px;border-radius:0px;color:green;">Update</button> <br>
+                      <br><br>
+            
+                  <button type ="submit" name="edit" style="width:60px;height:30px;padding:1px;font-size:13px;border-radius:4px; background-color:rgb(250,240,105);">Update</button> <br>
                 </div>
                 </form>
 
@@ -116,7 +116,7 @@ if(isset($_POST['add']))
                 <div style="border:2px dashed black;width:300px;height:250px;">
                   <h3>Delete teacher</h3>             
                      <input type="text" name="username" placeholder="username"><br><br>
-                <button type ="submit" name="delete" style="width:55px;height:40px;font-size:11px;border-radius:0px;color:red;">Delete</button> <br>
+                <button type ="submit" name="delete" style="width:60px;height:30px;padding:1px;font-size:13px;border-radius:4px; background-color:rgb(250,122,102);">Delete</button> <br>
                 </div>
                
              </form>
