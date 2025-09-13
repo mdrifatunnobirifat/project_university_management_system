@@ -1,7 +1,37 @@
+<?php
+include 'db.php';
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email'];  // hidden field or session
+    $code = $_POST['code'];
+
+    $sql = "SELECT * FROM reset_codes 
+            WHERE email='$email' 
+            AND code='$code' 
+            AND expires_at > NOW() 
+            LIMIT 1";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        $_SESSION['verified_email'] = $email; // password reset page-এ ব্যবহার হবে
+        header("Location: reset_password.php"); // redirect to reset password page
+        exit;
+    } else {
+        echo "<p style='color:red;'>Invalid or expired code.</p>";
+    }
+}
+?>
+
+
+
+
+
+
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Update Password</title>
+        <title>Verification Code</title>
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -29,7 +59,7 @@
                 display: block;
                 margin: 12px 0 6px;
             }
-            input[type="password"] {
+            input[type="text"] {
                 width: 100%;
                 padding: 10px;
                 border: 1px solid #ddd;
@@ -57,15 +87,11 @@
     </head>
     <body>
         <img src="../img/project.png" alt="Forget Password" width="200" height="200"><br><br>
-        <h2>Update your password</h2>
-        <form>
-            <label>New Password:</label><br>
-            <input type="password" id="new-password" name="new-password"><br><br>
-            <label>Confirm Password:</label><br>
-            <input type="password" id="confirm-password" name="confirm-password"><br><br>
-            <button type="submit">Update Password</button>
-            
 
+        <h2>Enter your verification code</h2>
+        <form action="/verify_code" method="post">
+            <label for="code">Verification Code:</label>
+            <input type="text" id="code" name="code" required><br><br>
+            <button type="submit">Verify</button>
+        </form>
     </body>
-
-</html>

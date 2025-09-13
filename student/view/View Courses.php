@@ -1,57 +1,46 @@
 <?php
+session_start();
 include 'config.php';
 
-
-
-
+$username = $_SESSION['username']; 
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Course Registration</title>
-    <link rel="stylesheet" type="text/css" href="../css/view_courses.css">
+    <title>View Courses</title>
+    <link rel="stylesheet" type="text/css" href="../css/view courses.css">
 </head>
 <body>
-    <h1>view course</h1>
+    <h1>My Registered Courses</h1>
     <div class="container">
-    <form action="" method="post">
         <table>
-            <th>course_name</th>
-            <th>section</th>
-            <th>time</th>
-            <th>action</th>
-
+            <tr>
+                <th>user ID</th>
+                <th>Course(s)</th>
+                <th>Action</th>
             </tr>
             <?php
-            $sql = "SELECT * FROM registered_courses";
+            
+            $sql = "SELECT * FROM course_registration WHERE username='$username'";
             $result = $conn->query($sql);
+
             if ($result && $result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     echo "<tr>
+                            <td>" . $row['username'] . "</td>
                             <td>" . $row['course_name'] . "</td>
-                            <td>" . $row['section'] . "</td>
-                            <td>" . $row['time'] . "</td>
-                            
-                            <td> <a href='delete_course.php?id=".$row['id']."' onclick=\"return confirm('Are you sure you want to drop this course?');\">drop</a></td>
+                            <td>
+                                <a href='Drop.php?id=".$row['id']."' onclick=\"return confirm('Are you sure you want to drop this course?');\">Drop</a>
+                            </td>
                           </tr>";
                 }
             } else {
-                echo "<tr><td colspan='6'>No courses found</td></tr>";
+                echo "<tr><td colspan='2'>No courses registered.</td></tr>";
             }
-
             ?>
-            
-        
         </table>
-
-    </form>
     </div>
-    <a href="course Registration.php">Add new course</a>
-    
-
-
-
-
-
+    <a href="Course Registration.php">Add New Course</a>
 </body>
+</html>

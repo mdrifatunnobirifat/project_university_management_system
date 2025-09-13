@@ -1,12 +1,101 @@
 <?php
+session_start();
 
 include 'config.php';
 
 $book_sql="SELECT title,author,available_copies,price  FROM library_book";
 $paper_sql="SELECT  title,author,available_copies,price FROM library_paper";
 
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+$username = $_SESSION['username'];
+$success = "";
+$error = "";
+
+if (isset($_POST['Borrow'])) {
+    $totalPrice = 0;
+    $quantity = 0;
+    $borrowedItems = [];
+
+    
+    if (!empty($_POST['book'])) {
+        foreach ($_POST['book'] as $book) {
+            
+            list($table, $title) = explode(" - ", $book);
+
+            // available copies check
+            $sql = "SELECT available_copies, price FROM $table WHERE title='$title' LIMIT 1";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+
+                if ($row['available_copies'] > 0) {
+                    
+                    $newQty = $row['available_copies'] - 1;
+                    $update = "UPDATE $table SET available_copies='$newQty' WHERE title='$title'";
+                    $conn->query($update);
+
+                    
+                    $totalPrice += $row['price'];
+                    $quantity++;
+
+                    
+                    $borrowedItems[] = $title;
+                } else {
+                    $error .= "❌ '$title' not available.<br>";
+                }
+            }
+        }
+    }
+
+    
+    if (!empty($_POST['paper'])) {
+        foreach ($_POST['paper'] as $paper) {
+            list($table, $title) = explode(" - ", $paper);
+
+            $sql = "SELECT available_copies, price FROM $table WHERE title='$title' LIMIT 1";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+
+                if ($row['available_copies'] > 0) {
+                    $newQty = $row['available_copies'] - 1;
+                    $update = "UPDATE $table SET available_copies='$newQty' WHERE title='$title'";
+                    $conn->query($update);
+
+                    $totalPrice += $row['price'];
+                    $quantity++;
+
+                    $borrowedItems[] = $title;
+                } else {
+                    $error .= "❌ '$title' not available.<br>";
+                }
+            }
+        }
+    }
+
+    if ($quantity > 0) {
+        
+        $items = implode(", ", $borrowedItems);
+        $insert = "INSERT INTO borrowed_books (username, items, quantity, total_price) 
+                   VALUES ('$username', '$items', '$quantity', '$totalPrice')";
+        if ($conn->query($insert)) {
+            $success = "✅ $username borrowed $quantity item(s). Total Price = $totalPrice Tk.<br>Books: $items";
+        } else {
+            $error .= "Database insert failed!<br>";
+        }
+    } else {
+        $error .= "⚠️ Please select at least one book/paper.<br>";
+    }
+
+}
+
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html>

@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +18,11 @@
             justify-content: center;
             align-items: left;
             padding: 30px;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
         }
         h1 {
             text-align: left;
@@ -61,24 +72,53 @@
         img {
             margin-bottom: 20px;
         }
+        .content {
+            margin-top: 20px;
+            width: 100%;
+            height: 600px;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+
     </style>
 </head>
     <body>
-        <form action="logout.html" method="post" >
+
+    <form action="logout.php" method="post">
             <button type="submit">Logout</button>
         </form>
-        <img src="../img/project.png" alt="Home" width="200" height="200">
-        <h1>Welcome student.....</h1>
 
+        <center>
+            <img src="../img/project.png" alt="Home" width="200" height="200">
+                      <h1>Welcome student.....</h1>
+        </center>
+    <div class ="container">
     <div class="nav-bar">
-        <a href="View Courses.html"><button>View Courses</button></a>
-    <a href="Check Grade.html"><button>Check Grade</button></a>
-    <a href="Submit Assignment.html"><button>Submit Assignment</button></a>
-    <a href="Borrow_Library_Book.php"><button>Borrow Library Book</button></a>
-    <a href="payment.html"><button>payment</button></a>
-    <a href="Course Registration.html"><button>Course Registration</button></a>
+        <a href="View Courses.php" target="abc"><button>View Courses</button></a>
+    <a href="Check Grade.php" target="abc"><button>Check Grade</button></a>
+    <a href="Submit Assignment.php" target="abc"><button>Submit Assignment</button></a>
+    <a href="Borrow_Library_Book.php" target="abc"><button>Borrow Library Book</button></a>
+    <a href="payment.php" target="abc"><button>payment</button></a>
+    <a href="Course Registration.php" target="abc"><button>Course Registration</button></a>
     </div>
+
+    <div class="content">
+        <iframe name="abc"> </iframe>
+    </div>
+
+    </div>
+
+    
         
 
     </body>
 </html>
+
+
+
