@@ -12,6 +12,15 @@ $result=$conn->query($sql);
     <head>
         <title>aiub clone</title>
         <link rel="stylesheet"  href="../css/aiub.css">
+        <style>
+            body
+                {
+                    background-image:url("../../main/image/admin all user.jpg");
+                    background-size:cover;
+                    background-position:center;
+                    background-repeat:no-repeat;
+                }
+        </style>
     </head>
     <body>
         <center>
@@ -40,7 +49,7 @@ $result=$conn->query($sql);
                         echo "<td class='tableheading'>".$row['fullname']."</td>";
                         echo "<td class='tableheading'>".$row['username']."</td>";
                         echo "<td class='tableheading'>".$row['role']."</td>";
-                         echo "<td class='tableheading'>".$row['department']."</td>";
+                        echo "<td class='tableheading'>".$row['department']."</td>";
                         echo "<td class='tableheading'>".$row['email']."</td>";
                         echo "</tr>";
                     }

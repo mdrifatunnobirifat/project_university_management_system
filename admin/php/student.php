@@ -71,6 +71,15 @@ if(isset($_POST['delete']))
     <head>
         <title>aiub clone</title>
         <link rel="stylesheet"  href="../css/aiub.css">
+         <style>
+            body
+                {
+                    background-image:url("../../main/image/manage user.jpg");
+                    background-size:cover;
+                    background-position:center;
+                    background-repeat:no-repeat;
+                }
+        </style>
     </head>
     <body>
       <center>

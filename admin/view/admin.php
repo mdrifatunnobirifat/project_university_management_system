@@ -44,7 +44,7 @@ if(!isset($_SESSION['username']))
          </div>
          
          <div id="id2">
-         <iframe id="idframe" style="width: 1300px;height: 700px;"></iframe>
+         <iframe id="idframe" style="width: 1300px;height: 700px; backgroung-color='white'"></iframe>
        </div>
        </center>
     <script src="../js/aiub.js"></script>
