@@ -5,6 +5,7 @@ if(!isset($_SESSION['username']))
 {
     header('Location:/project_university_management_system/main/login.php');
     exit();
+    
 }
 ?>
 <!DOCTYPE html>

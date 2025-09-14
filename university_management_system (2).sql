@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 13, 2025 at 08:20 AM
+-- Generation Time: Sep 14, 2025 at 01:33 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -52,6 +52,27 @@ INSERT INTO `addcourse` (`ID`, `course`, `section`, `date1`, `date2`, `time`, `s
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `announcements`
+--
+
+CREATE TABLE `announcements` (
+  `id` int(11) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `target_audience` varchar(255) NOT NULL,
+  `message` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `announcements`
+--
+
+INSERT INTO `announcements` (`id`, `subject`, `target_audience`, `message`) VALUES
+(1, 'data science', 'All Students', 'klk class nai'),
+(0, 'alert', 'All Students', 'we have defense today');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `assignment`
 --
 
@@ -63,6 +84,13 @@ CREATE TABLE `assignment` (
   `file` varchar(255) NOT NULL,
   `submitted_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `assignment`
+--
+
+INSERT INTO `assignment` (`id`, `student_name`, `student_id`, `course`, `file`, `submitted_at`) VALUES
+(0, 'maruf', '22-48582-3', 'DATA  SCIENCE', 'Assignment Cover - Fillable 2025.docx', '2025-09-13 16:53:28');
 
 -- --------------------------------------------------------
 
@@ -84,9 +112,7 @@ CREATE TABLE `borrowed_books` (
 --
 
 INSERT INTO `borrowed_books` (`id`, `username`, `items`, `quantity`, `total_price`, `borrowed_at`) VALUES
-(1, '22-48582-3', 'Introduction to Algorithms', 1, 500.00, '2025-09-12 16:29:50'),
-(2, '22-48582-3', 'The Pragmatic Programmer, Quantum Computing for Computer Scientists', 2, 550.00, '2025-09-12 16:30:18'),
-(3, '22-48582-3', 'Introduction to Algorithms, Clean Code', 2, 900.00, '2025-09-12 16:35:32');
+(2, '22-48582-3', 'A Survey on Deep Learning, Quantum Computing for Computer Scientists, The Art of Computer Programming', 3, 1250.00, '2025-09-13 17:04:44');
 
 -- --------------------------------------------------------
 
@@ -142,8 +168,16 @@ INSERT INTO `course` (`ID`, `fullname`, `username`, `department`, `course`) VALU
 CREATE TABLE `course_registration` (
   `id` int(11) NOT NULL,
   `username` varchar(100) NOT NULL,
-  `course_name` text NOT NULL
+  `course_name` text NOT NULL,
+  `total_fee` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `course_registration`
+--
+
+INSERT INTO `course_registration` (`id`, `username`, `course_name`, `total_fee`) VALUES
+(0, '22-48582-3', 'Web Technology - A, Data Science - B', 10000);
 
 -- --------------------------------------------------------
 
@@ -168,6 +202,53 @@ INSERT INTO `data_science` (`id`, `section`, `subject`, `time`) VALUES
 (3, 'C', 'Data science', '11:30 AM - 01:00 PM'),
 (4, 'D', 'Data science', '02:00 PM - 03:30 PM'),
 (5, 'E', 'Data science', '03:45 PM - 05:15 PM');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `grade`
+--
+
+CREATE TABLE `grade` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `course_name` varchar(100) NOT NULL,
+  `grade` varchar(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `grade`
+--
+
+INSERT INTO `grade` (`id`, `username`, `course_name`, `grade`) VALUES
+(1, '22-48582-3', 'Web Technology - A', 'A'),
+(2, '22-48582-3', 'Data Science - B', 'B+'),
+(3, '22-48582-3', 'Computer Networks - A', 'A-'),
+(4, '22-48580-3', 'Web Technology - B', 'B'),
+(5, '22-48580-3', 'Data Science - A', 'A');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `grades`
+--
+
+CREATE TABLE `grades` (
+  `id` int(11) NOT NULL,
+  `student_id` varchar(20) NOT NULL,
+  `student_name` varchar(100) NOT NULL,
+  `course_name` varchar(100) NOT NULL,
+  `grade` varchar(5) NOT NULL,
+  `year` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `grades`
+--
+
+INSERT INTO `grades` (`id`, `student_id`, `student_name`, `course_name`, `grade`, `year`, `created_at`) VALUES
+(1, '22-48582-3', 'maruf', 'data science', 'A+', 2025, '2025-09-13 22:57:04');
 
 -- --------------------------------------------------------
 
@@ -214,7 +295,7 @@ INSERT INTO `library_book` (`id`, `title`, `author`, `available_copies`, `price`
 (2, 'Clean Code', 'Robert C. Martin', 1, 400.00),
 (3, 'The Pragmatic Programmer', 'Andrew Hunt', 0, 300.00),
 (4, 'Design Patterns', 'Erich Gamma', 0, 600.00),
-(5, 'Artificial Intelligence: A Modern Approach', 'Stuart Russell', 4, 700.00);
+(5, 'Artificial Intelligence: A Modern Approach', 'Stuart Russell', 1, 700.00);
 
 -- --------------------------------------------------------
 
@@ -235,11 +316,11 @@ CREATE TABLE `library_paper` (
 --
 
 INSERT INTO `library_paper` (`id`, `title`, `author`, `available_copies`, `price`) VALUES
-(1, 'A Survey on Deep Learning', 'Yann LeCun', 5, 200.00),
-(2, 'Quantum Computing for Computer Scientists', 'Noson S. Yanofsky', 1, 250.00),
-(3, 'The Art of Computer Programming', 'Donald E. Knuth', 1, 800.00),
-(4, 'Introduction to the Theory of Computation', 'Michael Sipser', 0, 450.00),
-(5, 'Computer Networks', 'Andrew S. Tanenbaum', 3, 350.00);
+(1, 'A Survey on Deep Learning', 'Yann LeCun', 9, 200.00),
+(2, 'Quantum Computing for Computer Scientists', 'Noson S. Yanofsky', 8, 250.00),
+(3, 'The Art of Computer Programming', 'Donald E. Knuth', 9, 800.00),
+(4, 'Introduction to the Theory of Computation', 'Michael Sipser', 9, 450.00),
+(5, 'Computer Networks', 'Andrew S. Tanenbaum', 2, 350.00);
 
 -- --------------------------------------------------------
 
@@ -280,7 +361,51 @@ INSERT INTO `login` (`ID`, `username`, `password`) VALUES
 (24, '22-34467-2', '$2y$10$rzVUUBH11/IWH0YIuKqo7e7Hd7voevDRBx3S3PfeOpeiPf7VQCD3C'),
 (25, '1234-1234', '$2y$10$Rom3D5vMt.4gZSdKtkNLGudqoDzQFRK2DUPG3UujhND7RJk8NuK0i'),
 (26, '22-48582-3', '$2y$10$qU.nOfWFE87PsTZ9PWEIsO6HGpEy9FRerSq4iyNJZ2n6BwhMQjqde'),
-(27, '22-77777-2', '$2y$10$9BgDmjpxnMB7.JlcissnqOfkzpIO2qZHhhJUQvVlwKL09i01XHTmq');
+(27, '22-77777-2', '$2y$10$9BgDmjpxnMB7.JlcissnqOfkzpIO2qZHhhJUQvVlwKL09i01XHTmq'),
+(28, '9999-0000', '$2y$10$PS8ko.qs4oiEZHd2AD9Y8eQ.UQTCQ2gD5mqS3uD5PbnPjlkpROBdu'),
+(29, '3333-4444', '$2y$10$Ncg/KTG/YeTFlqW4uY2Ibu.IDrr9rO8RlWRCnckdxiOuOBrB6Oq0S'),
+(30, '22-48583-3', '$2y$10$eFmLoeNqQrvun.ujzbTahubBnF7IOojpxCkwwyQJY9Xct2RP75G2O'),
+(31, '2001-2025', '$2y$10$2wbf5/uDGdwIC9L71T8Zxu5Bkefs6fcJ9mDlBp6ApZR4bw5UUjJkW');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `material`
+--
+
+CREATE TABLE `material` (
+  `Material_ID` int(11) NOT NULL,
+  `Title` varchar(255) DEFAULT NULL,
+  `Course` varchar(100) DEFAULT NULL,
+  `Upload_Date` date DEFAULT NULL,
+  `Upload_File` longblob DEFAULT NULL,
+  `File_Name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `course_name` text NOT NULL,
+  `amount` int(11) NOT NULL,
+  `bank_number` varchar(20) DEFAULT NULL,
+  `cvc` varchar(5) DEFAULT NULL,
+  `payment_status` varchar(20) DEFAULT 'Completed',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`id`, `username`, `course_name`, `amount`, `bank_number`, `cvc`, `payment_status`, `created_at`) VALUES
+(0, 'admin', 'Web Technology - A, Data Science - C', 10000, '1234567890123456', '123', 'Completed', '2025-09-13 16:41:56'),
+(3, '22-48582-3', 'Web Technology - A, Data Science - D', 10000, '1234567890123456', '123', 'Completed', '2025-09-13 15:38:31');
 
 -- --------------------------------------------------------
 
@@ -304,23 +429,58 @@ CREATE TABLE `registration` (
 --
 
 INSERT INTO `registration` (`ID`, `fullname`, `role`, `department`, `username`, `email`, `password`, `notification`) VALUES
-(1, 'mdrifat', 'Student', '', '22-40000-2', 'amitumi@gmail.com', '$2y$10$Br871U2mUuNwL0pCVSn/CetJz9Ujzq18UiYGv9Owd4Y5ulhQ4xJlW', 'attention to all user. you are now our member.'),
 (19, 'maruf', 'Teacher', 'FST', '1223-5678', 'mdrifatunnabi@gmail.com', '$2y$10$sfCdKY1VCumeMrErW6ZOSeQkoFJfBPTDH3gmEd95QuFwI9apHjjJu', 'attention to all user. you are now our member.'),
-(20, 'rifat  oooo', 'Student', '', '22-47527-2', 'loserm42@gmail.com', '$2y$10$PKVfXJZNqXZMzslQTb4uYemVBDbIlKzb.YG4PjqUw0hDFb/1SThMG', 'attention to all user. you are now our member.'),
 (24, 'mahatab shah', 'Teacher', 'FST', '1234-1243', 'mdrifatunnabi@gmail.com', '$2y$10$7b4hAL6zje8sJiLDsBKQ2OG0PbVV3CZ305TDMxoVJEnCKPOjQOs0S', 'attention to all user. you are now our member.'),
 (25, 'mahatab shah', 'Teacher', 'FEE', '1234-1265', 'mdrifatunnabi@gmail.com', '$2y$10$RBpZdLCizCYIkFnjlUq0Y.aJaPMdwxqzyDJ1aUaDRR2i.GjNKWk72', 'attention to all user. you are now our member.'),
 (26, 'rifat rifat', 'Student', 'FBA', '00-00000-0', '11@gamil.com', '$2y$10$gsBS8lJM7KePDr7dkNtswuRr5MqvCMf9XmbujEulVYSxfXSICUC7e', 'attention to all user. you are now our member.'),
 (27, 'rifat tunn', 'Student', 'FEE', '01-01010-1', 'mdrifatunnabi@gmail.com', '$2y$10$HjGBoyIqEtYRL403Bij2I./3bPPC3LpbDZ3IrGoyva5TjH3AlRYGW', 'attention to all user. you are now our member.'),
 (28, 'rifat', 'Student', 'FEE', '22-47625-4', 'mdrifatunnabi@gmail.com', '$2y$10$kjVMVfd43PVkEreSuvdPRey/HybaPZRXcoH9rhpNAW63JWusd.7q2', 'attention to all user. you are now our member.'),
 (29, 'sheun ahmed', 'Teacher', 'FBA', '1444-1420', '11@gamil.com', '$2y$10$nC4cRU1.QsWzRicOU0enrul1eRdkqoVP5A2foFfK7aiSlQqwj8IOW', 'attention to all user. you are now our member.'),
-(30, '', '', '', '', '', '$2y$10$C9UgoX1Zi4LsWxDT.niY7.O.xnCHr5ZACnHdwEBegPHCt6AL1UL96', ''),
 (31, 'rifatun rifat', 'Student', 'FST', '29-21901-0', 'mdrifatunnabi@gmail.com', '$2y$10$YEG7Z9mJo8KKE9v5Jxn5neyt6o20SUSMwhmWP3P9OmwcaXp.bW42a', 'attention to all user. you are now our member.'),
 (32, 'MD.Rifatun Nobi Rifat', 'Student', 'FST', '22-34467-2', 'mdrifatunnabi@gmail.com', '$2y$10$rzVUUBH11/IWH0YIuKqo7e7Hd7voevDRBx3S3PfeOpeiPf7VQCD3C', 'attention to all user. you are now our member.'),
-(33, 'rifat', '', '', '1234-1234', '', '$2y$10$Rom3D5vMt.4gZSdKtkNLGudqoDzQFRK2DUPG3UujhND7RJk8NuK0i', ''),
-(34, 'MARUF', 'Student', 'FST', '22-48582-3', 'amitumi@gmail.com', '$2y$10$qU.nOfWFE87PsTZ9PWEIsO6HGpEy9FRerSq4iyNJZ2n6BwhMQjqde', 'attention to all user. you are now our member.'),
 (35, 'md.rifatun nobi rifat', 'Student', 'FST', '22-77777-2', 'mdrifatunnabi@gmail.com', '$2y$10$9BgDmjpxnMB7.JlcissnqOfkzpIO2qZHhhJUQvVlwKL09i01XHTmq', 'attention to all user. you are now our member.'),
-(47, '', '', '', '', '', '', 'attention to all user. you are now our member.'),
-(48, '', '', '', '', '', '', 'attention to all user. you are now our member.');
+(49, 'MD. Naimur Rahman', 'Teacher', 'FEE', '9999-0000', '11@gamil.com', '$2y$10$PS8ko.qs4oiEZHd2AD9Y8eQ.UQTCQ2gD5mqS3uD5PbnPjlkpROBdu', ''),
+(50, 'durjoy ahmed', 'Teacher', 'FBA', '3333-4444', '11@gamil.com', '$2y$10$Ncg/KTG/YeTFlqW4uY2Ibu.IDrr9rO8RlWRCnckdxiOuOBrB6Oq0S', ''),
+(51, 'md. maruf chowdhury', 'Student', 'FST', '22-48583-3', 'marufchowdhury@gmail.com', '$2y$10$eFmLoeNqQrvun.ujzbTahubBnF7IOojpxCkwwyQJY9Xct2RP75G2O', ''),
+(52, 'sheun ahmed', 'Teacher', 'FST', '2001-2025', 'sheunahmed@gmail.com', '$2y$10$2wbf5/uDGdwIC9L71T8Zxu5Bkefs6fcJ9mDlBp6ApZR4bw5UUjJkW', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reset_codes`
+--
+
+CREATE TABLE `reset_codes` (
+  `id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `code` varchar(6) NOT NULL,
+  `expires_at` datetime NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reset_codes`
+--
+
+INSERT INTO `reset_codes` (`id`, `email`, `code`, `expires_at`, `created_at`) VALUES
+(1, 'marufhasanchowdhury2002@gmail.com', '366984', '2025-09-12 21:23:27', '2025-09-12 19:13:27'),
+(2, 'marufhasanchowdhury2002@gmail.com', '160419', '2025-09-12 21:23:38', '2025-09-12 19:13:38'),
+(3, 'marufhasanchowdhury2002@gmail.com', '976627', '2025-09-12 21:25:46', '2025-09-12 19:15:46'),
+(4, 'marufhasanchowdhury2002@gmail.com', '767608', '2025-09-12 21:36:32', '2025-09-12 19:26:32'),
+(5, 'marufhasanchowdhury2002@gmail.com', '507292', '2025-09-12 21:36:47', '2025-09-12 19:26:47'),
+(6, 'marufhasanchowdhury2002@gmail.com', '112005', '2025-09-12 21:37:09', '2025-09-12 19:27:09'),
+(7, 'marufhasanchowdhury2002@gmail.com', '862292', '2025-09-12 21:37:51', '2025-09-12 19:27:51'),
+(8, 'marufhasanchowdhury2002@gmail.com', '477080', '2025-09-12 21:39:49', '2025-09-12 19:29:49'),
+(9, 'marufhasanchowdhury2002@gmail.com', '813965', '2025-09-12 21:39:53', '2025-09-12 19:29:53'),
+(10, 'marufhasanchowdhury2002@gmail.com', '620129', '2025-09-12 21:39:55', '2025-09-12 19:29:55'),
+(11, 'marufhasanchowdhury2002@gmail.com', '533123', '2025-09-12 21:46:40', '2025-09-12 19:36:40'),
+(12, 'marufhasanchowdhury06@gmail.com', '542354', '2025-09-12 21:47:08', '2025-09-12 19:37:08'),
+(13, 'marufhasanchowdhury06@gmail.com', '994930', '2025-09-12 21:51:05', '2025-09-12 19:41:05'),
+(14, 'marufhasanchowdhury06@gmail.com', '642278', '2025-09-12 21:52:22', '2025-09-12 19:42:22'),
+(15, 'marufhasanchowdhury06@gmail.com', '683465', '2025-09-12 21:53:26', '2025-09-12 19:43:26'),
+(16, 'marufhasanchowdhury06@gmail.com', '176313', '2025-09-12 21:54:38', '2025-09-12 19:44:38'),
+(17, 'marufhasanchowdhury06@gmail.com', '550944', '2025-09-13 12:15:08', '2025-09-13 10:05:08'),
+(18, 'marufhasanchowdhury06@gmail.com', '608261', '2025-09-13 12:27:20', '2025-09-13 10:17:20');
 
 -- --------------------------------------------------------
 
@@ -389,6 +549,14 @@ INSERT INTO `studentcourse` (`Course ID`, `Course Name`, `Instructor`, `Credits`
 (1, 'Physics I', 'Dr. Hossain', 3, 'Tue-Thu 11:00-12:30', 'Edit | Delete'),
 (2, '', '', 0, '', ''),
 (3, '', '', 0, '', ''),
+(4, 'abc', 'xyz', 3, '10:20-11:20', ''),
+(1, 'Physics I', 'Dr. Hossain', 3, 'Tue-Thu 11:00-12:30', 'Edit | Delete'),
+(2, '', '', 0, '', ''),
+(3, '', '', 0, '', ''),
+(4, 'abc', 'xyz', 3, '10:20-11:20', ''),
+(1, 'Physics I', 'Dr. Hossain', 3, 'Tue-Thu 11:00-12:30', 'Edit | Delete'),
+(2, '', '', 0, '', ''),
+(3, '', '', 0, '', ''),
 (4, 'abc', 'xyz', 3, '10:20-11:20', '');
 
 -- --------------------------------------------------------
@@ -417,6 +585,26 @@ INSERT INTO `tcourse` (`ID`, `username`, `fullname`, `department`, `assigncourse
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `user_courses`
+--
+
+CREATE TABLE `user_courses` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `course_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_courses`
+--
+
+INSERT INTO `user_courses` (`id`, `username`, `course_name`) VALUES
+(11, '22-48582-3', 'Web Technology - A'),
+(12, '22-48582-3', 'Data Science - B');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `web_tech`
 --
 
@@ -432,6 +620,14 @@ CREATE TABLE `web_tech` (
 --
 
 INSERT INTO `web_tech` (`id`, `section`, `subject`, `time`) VALUES
+(1, 'A', 'Web Technology', '08:00 AM - 09:30 AM'),
+(2, 'B', 'Web Technology', '09:45 AM - 11:15 AM'),
+(4, 'D', 'Web Technology', '02:00 PM - 03:30 PM'),
+(5, 'E', 'Web Technology', '03:45 PM - 05:15 PM'),
+(1, 'A', 'Web Technology', '08:00 AM - 09:30 AM'),
+(2, 'B', 'Web Technology', '09:45 AM - 11:15 AM'),
+(4, 'D', 'Web Technology', '02:00 PM - 03:30 PM'),
+(5, 'E', 'Web Technology', '03:45 PM - 05:15 PM'),
 (1, 'A', 'Web Technology', '08:00 AM - 09:30 AM'),
 (2, 'B', 'Web Technology', '09:45 AM - 11:15 AM'),
 (4, 'D', 'Web Technology', '02:00 PM - 03:30 PM'),
@@ -485,6 +681,18 @@ ALTER TABLE `data_science`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `grade`
+--
+ALTER TABLE `grade`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `grades`
+--
+ALTER TABLE `grades`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `leaveapplication`
 --
 ALTER TABLE `leaveapplication`
@@ -509,15 +717,15 @@ ALTER TABLE `login`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `registration`
 --
 ALTER TABLE `registration`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `result`
---
-ALTER TABLE `result`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -533,21 +741,15 @@ ALTER TABLE `scourse`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `studentcourse`
---
-ALTER TABLE `studentcourse`
-  ADD PRIMARY KEY (`Course ID`);
-
---
 -- Indexes for table `tcourse`
 --
 ALTER TABLE `tcourse`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `web_tech`
+-- Indexes for table `user_courses`
 --
-ALTER TABLE `web_tech`
+ALTER TABLE `user_courses`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -561,9 +763,9 @@ ALTER TABLE `addcourse`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `assignment`
+-- AUTO_INCREMENT for table `borrowed_books`
 --
-ALTER TABLE `assignment`
+ALTER TABLE `borrowed_books`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -571,6 +773,18 @@ ALTER TABLE `assignment`
 --
 ALTER TABLE `course`
   MODIFY `ID` int(120) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `grade`
+--
+ALTER TABLE `grade`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `grades`
+--
+ALTER TABLE `grades`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `leaveapplication`
@@ -582,19 +796,13 @@ ALTER TABLE `leaveapplication`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `ID` int(120) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `ID` int(120) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `registration`
 --
 ALTER TABLE `registration`
-  MODIFY `ID` int(120) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
-
---
--- AUTO_INCREMENT for table `result`
---
-ALTER TABLE `result`
-  MODIFY `ID` int(120) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(120) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `salary`
@@ -613,6 +821,12 @@ ALTER TABLE `scourse`
 --
 ALTER TABLE `tcourse`
   MODIFY `ID` int(120) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+
+--
+-- AUTO_INCREMENT for table `user_courses`
+--
+ALTER TABLE `user_courses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
